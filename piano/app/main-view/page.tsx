@@ -1,6 +1,7 @@
 "use client";
 import { redirect } from "next/navigation";
 import MainView from "../components/MainView";
+import RollsList from "../components/RollsList";
 
 const Page = ({
   searchParams,
@@ -14,7 +15,10 @@ const Page = ({
   }
   return (
     <div className="h-[calc(100vh-44px)]">
-      <MainView itemId={+itemId} />
+      <div className="container m-auto flex h-full grid-cols-12 flex-col gap-[2rem] md:grid">
+        <MainView itemId={+itemId} />
+        <RollsList />
+      </div>
     </div>
   );
 };
