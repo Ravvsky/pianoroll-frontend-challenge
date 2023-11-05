@@ -5,21 +5,34 @@ const Overlay = ({
   children,
   divRef,
   newDistance,
-  isResizing,
+  newStartingPoint,
   resizingHandle,
+  onStartingPointChange,
 }: {
   children: ReactNode;
   divRef: React.RefObject<HTMLDivElement>;
   newDistance: number;
-  isResizing: boolean;
+  newStartingPoint: number;
   resizingHandle: string;
+  onStartingPointChange: ({
+    startingPoint,
+    width,
+  }: {
+    startingPoint: number;
+    width: number;
+  }) => void;
 }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const [overlayStart, setOverlayStart] = useState(0);
-  const [overlayWidth, setOverlayWidth] = useState(300);
+  const [overlayWidth, setOverlayWidth] = useState(0);
   const [isMousePressed, setIsMousePressed] = useState(false);
   const [oldX, setOldX] = useState(0);
 
+  useEffect(() => {
+    if (newStartingPoint) {
+      setOverlayStart(newStartingPoint);
+    }
+  }, [newStartingPoint]);
   useEffect(() => {
     if (overlayRef.current) {
       setOverlayWidth(overlayRef.current.offsetWidth);
@@ -27,15 +40,13 @@ const Overlay = ({
     }
   }, []);
   const mouseDownHandler = () => {
-    if (!isResizing) {
+    if (!resizingHandle) {
       setIsMousePressed(true);
     }
   };
 
   const mouseUpHandler = () => {
-    if (!isResizing) {
-      setIsMousePressed(false);
-    }
+    setIsMousePressed(false);
   };
 
   const mouseMoveHandler: React.MouseEventHandler<HTMLDivElement> = (
@@ -68,6 +79,9 @@ const Overlay = ({
     }
   }, [newDistance, resizingHandle]);
 
+  useEffect(() => {
+    onStartingPointChange({ startingPoint: overlayStart, width: overlayWidth });
+  }, [onStartingPointChange, overlayStart, overlayWidth]);
   return (
     <div
       ref={overlayRef}
