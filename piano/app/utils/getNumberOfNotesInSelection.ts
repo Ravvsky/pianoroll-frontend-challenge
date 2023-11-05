@@ -1,9 +1,9 @@
-import { MutableRefObject } from "react";
+import { RefObject } from "react";
 
 const getNumberOfNotesInSelection = (
   notesSelector: string,
   roll: Element,
-  ref: MutableRefObject<HTMLElement>,
+  ref: RefObject<HTMLDivElement>,
   overlayStartingPoint: number,
   overlayWidth: number,
 ) => {
