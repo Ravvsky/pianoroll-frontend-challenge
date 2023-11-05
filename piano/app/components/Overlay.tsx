@@ -12,8 +12,8 @@ const Overlay = ({
   children: ReactNode;
   divRef: React.RefObject<HTMLDivElement>;
   newDistance: number;
-  newStartingPoint: number;
-  resizingHandle: string;
+  newStartingPoint: number | undefined;
+  resizingHandle: string | undefined;
   onStartingPointChange: ({
     startingPoint,
     width,
@@ -84,6 +84,10 @@ const Overlay = ({
   }, [onStartingPointChange, overlayStart, overlayWidth]);
   return (
     <div
+      draggable="false"
+      onDragStart={(e) => {
+        e.preventDefault();
+      }}
       ref={overlayRef}
       onMouseDown={mouseDownHandler}
       onMouseUp={mouseUpHandler}
