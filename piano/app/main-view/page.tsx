@@ -15,7 +15,7 @@ const Page = ({
   }
   return (
     <div className="h-[calc(100vh-44px)]">
-      <div className="container m-auto flex h-full grid-cols-12 flex-col gap-[2rem] md:grid">
+      <div className="container m-auto mt-[2rem] flex h-full grid-cols-12 flex-col gap-[2rem] md:grid">
         <MainView itemId={+itemId} />
         <RollsList />
       </div>
