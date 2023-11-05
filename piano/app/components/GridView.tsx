@@ -34,7 +34,7 @@ const GridView = ({ data }: { data: Sequence[] }) => {
 
   return (
     <InfiniteScroll
-      className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 container gap-[2rem] m-auto"
+      className="container m-auto grid gap-[2rem] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       dataLength={rolls.length}
       next={fetchNewRolls}
       hasMore={true}
